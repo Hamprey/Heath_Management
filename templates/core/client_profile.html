@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ client.first_name }} {{ client.middle_name }} {{ client.last_name }}'s Profile</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+<div class="profile-container">
+    <div class="profile-header">
+        <h1>{{ client.first_name }} {% if client.middle_name %}{{ client.middle_name }}{% endif %} {{ client.last_name }}</h1>
+    </div>
+    
+    <div class="profile-details">
+        <div class="profile-item">
+            <label>Email:</label>
+            <span>{{ client.email|default:"N/A" }}</span>
+        </div>
+        <div class="profile-item">
+            <label>Phone:</label>
+            <span>{{ client.phone|default:"N/A" }}</span>
+        </div>
+        <div class="profile-item">
+            <label>Age:</label>
+            <span>{{ client.age }}</span>
+        </div>
+    </div>
+
+    <div class="profile-enrollments">
+        <h3>Enrolled Programs</h3>
+        <ul>
+            {% for enrollment in enrollments %}
+                <li>{{ enrollment.program.name }} (Enrolled on {{ enrollment.date_enrolled }})</li>
+            {% empty %}
+                <li>No programs enrolled yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a class="back-link" href="{% url 'home' %}">← Back to Home</a>
+</div>
+
+<script src="{% static 'core/script.js' %}" defer></script>
+
+</body>
+</html>
+
+
+

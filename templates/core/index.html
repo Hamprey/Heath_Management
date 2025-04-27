@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<a href="{% url 'all_clients' %}">View All Clients</a>
+
+<h2>View Enrolled Users</h2>
+<a href="{% url 'enrolled_clients' %}">Click to view all enrolled users</a>
+
+<h2>Enrollments</h2>
+
+{% endblock %}

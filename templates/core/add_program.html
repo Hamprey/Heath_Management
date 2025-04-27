@@ -1,0 +1,26 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Health Program</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <script src="{% static 'core/script.js' %}" defer></script>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Add New Health Program</h2>
+    <form method="post" class="styled-form" id="programForm" autocomplete="off">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="primary-button">Add</button>
+    </form>
+    <a class="back-link" href="{% url 'home' %}">← Back</a>
+</div>
+
+</body>
+</html>

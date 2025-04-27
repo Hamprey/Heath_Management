@@ -1,0 +1,52 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enroll Client</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <script src="{% static 'core/script.js' %}" defer></script>
+</head>
+<body>
+
+<div class="form-container animate-slide">
+    <h2>Enroll Client in Program</h2>
+    <form method="post" class="styled-form" id="enrollForm">
+        {% csrf_token %}
+        
+        <table class="form-table">
+            <tbody>
+                {% for field in form %}
+                    <tr>
+                        <td class="{% if field.name == 'client' or field.name == 'program' %}small-width{% endif %}">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        </td>
+                        <td>
+                            <div class="field-wrapper">
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="form-error">
+                                        {% for error in field.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="submit">✅ Enroll</button>
+    </form>
+
+    <a class="back-link" href="{% url 'home' %}">← Back to Home</a>
+</div>
+
+</body>
+</html>
+

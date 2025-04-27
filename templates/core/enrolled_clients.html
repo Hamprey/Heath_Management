@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2>Enrolled Clients</h2>
+
+<form method="GET" action="">
+    <input type="text" name="search" placeholder="Search clients..." value="{{ request.GET.search|default:'' }}">
+    <button type="submit">Search</button>
+</form>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Client Name</th>
+            <th>Email</th>
+            <th>Program</th>
+            <th>Date Enrolled</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enrollment in enrollments %}
+            <tr>
+                <td>{{ enrollment.client.first_name }} {% if enrollment.client.middle_name %}{{ enrollment.client.middle_name }} {% endif %}{{ enrollment.client.last_name }}</td>
+                <td>{{ enrollment.client.email }}</td>
+                <td>{{ enrollment.program.name }}</td>
+                <td>{{ enrollment.date_enrolled }}</td>
+                <td><a href="{% url 'client_profile' enrollment.client.id %}" class="btn">View Profile</a></td>
+            </tr>
+        {% empty %}
+            <tr class="empty-state">
+                <td colspan="5">No clients are currently enrolled in any program.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'home' %}" class="back-link">← Back to Home</a>
+{% endblock %}
+
+
+
+
+
